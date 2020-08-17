@@ -1,9 +1,19 @@
-import random 
+"""
+Created on Sun Aug 13 2020
 
-class Card(object):
-    def __init__(self, suit, val):
+@author: Ali Alian
+"""
+
+import random 
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
+class Card:
+    def __init__(self, suit, val, CardName=""):
+    
         self.suit = suit
         self.val = val
+        self.CardName = CardName
         
     def __unicode__(self):
         return self.show()
@@ -11,26 +21,38 @@ class Card(object):
         return self.show()
     def __repr__(self):
         return self.show()
-
+ 
     def show(self):
         
         if self.val == 11:
-            val = "Jack"
+            val = "J"    # "Jack"
         elif self.val == 12:
-            val = "Queen"
+            val = "Q"    #"Queen"
         elif self.val == 13:
-            val = "King"
+            val = "K"    #"King"
         elif self.val == 1:
-            val = "Ace"
+            val = "A"    #"Ace"
         else:
             val = self.val
         
-        return "{} of {}".format(val, self.suit)
+        CardName = "{}{}.png".format(val, self.suit)
+        
+        
+        for i in CardName:
+            path1 = "data/PNG/10C.png"
+            newpath = CardName
+            x = path1.split("/")
+            x = path1.replace(x[-1], newpath) 
+            img=mpimg.imread(x)
+            #print(type(newpath))
+            plt.imshow(img)
+        
+        return CardName
     
-    
-    
-    
-class Deck(object):
+        
+
+        
+class Deck(Card):
     
     def __init__(self):
         self.cards = []
@@ -42,7 +64,7 @@ class Deck(object):
         
     def build(self):
         self.cards = []
-        for e in ["Spades", "Clubs", "Diamonds", "hearts"]:
+        for e in ["S", "C", "D", "H"]:      #["Spades", "Clubs", "Diamonds", "hearts"]
             for v in range(1, 14):
                 self.cards.append(Card(e, v))
                 
@@ -55,14 +77,14 @@ class Deck(object):
         return self.cards.pop()
     
     
-class Player(object):
+class Player(Card):
     
     def __init__(self, name):
         self.name = name 
         self.hand = []   # empty list to fill with player cards
     
     def P_name(self):
-        print("hey my name is {}".format(self.name))
+        print("hey my name is {}, we have a Spades, Clubs, Diamonds, hearts".format(self.name))
 
         
     def draw(self, deck, num=1):
@@ -73,7 +95,18 @@ class Player(object):
         
     def showHand(self):
         
-        print('{}, has a : {}'.format(self.name, self.hand))
+#        print('{}, has a : {}'.format(self.name, self.hand))
+        print('{}'.format(self.hand))
+        
+#         for i in self.hand:
+#             name = i
+#             name = name.replace(" ", ".0")
+#             print(name)
+        
+#         print(self.hand)
+#         for i in self.hand:
+#             print(type(i))
+        
         #return self
         #c.show()
         
@@ -95,7 +128,5 @@ deck.shuffle()
 
 player = Player("Ali")
 player.P_name()
-player.draw(deck, 4)
+player.draw(deck, 2)
 player.showHand()
-
-
