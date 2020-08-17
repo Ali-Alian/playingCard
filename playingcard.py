@@ -39,7 +39,7 @@ class Card:
         
         
         for i in CardName:
-            path1 = "data/PNG/10C.png"
+            path1 = "PNG/10C.png"
             newpath = CardName
             x = path1.split("/")
             x = path1.replace(x[-1], newpath) 
