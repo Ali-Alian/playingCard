@@ -5,7 +5,7 @@ First update on 23 January 2024
 """
 
 import random 
-%matplotlib inline
+#%matplotlib inline
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
